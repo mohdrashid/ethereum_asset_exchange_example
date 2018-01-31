@@ -33,11 +33,11 @@ module.exports = {
         });
     },
     get: async function(instance,functionName,args,from){
-        return await args ? instance.methods[functionName](args).call({from: from}) : instance.methods[functionName]().call({from: from});
+        return await instance.methods[functionName].apply(null, args).call({from: from});
     },
     set: async function(instance,functionName,args,from){
         return new Promise((resolve,reject)=>{
-            (args ? instance.methods[functionName](args).send({from: from}) : instance.methods[functionName]().send({from: from}))
+            (args ? instance.methods[functionName].apply(null,args).send({from: from}) : instance.methods[functionName]().send({from: from}))
             .on('confirmation', (confirmationNumber, receipt) => { 
                 resolve(true);
              })
