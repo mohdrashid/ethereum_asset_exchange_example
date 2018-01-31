@@ -1,0 +1,29 @@
+{
+  "name": "web3_tutoring",
+  "version": "1.0.0",
+  "description": "A example showing usage of web3 to interact with blockchain",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mohdrashid/web3_asset_exchange_example.git"
+  },
+  "keywords": [
+    "Web3",
+    "blockchain",
+    "asset",
+    "exchange"
+  ],
+  "author": "Mohammed Rashid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mohdrashid/web3_asset_exchange_example/issues"
+  },
+  "homepage": "https://github.com/mohdrashid/web3_asset_exchange_example#readme",
+  "dependencies": {
+    "solc": "^0.4.19",
+    "web3": "^1.0.0-beta.29"
+  }
+}
