@@ -27,7 +27,8 @@ async function deploy(){
         'Administered.sol': Administered,
         'Asset.sol': Asset
     }
-    const defaultAccount = await web3.eth.getCoinbase();
+    const accounts = await web3.eth.getAccounts();
+    const defaultAccount = accounts[0];
     const contractInstances = await contract3.getInstances(input);
     const AssetInstance = contractInstances['Asset'];
     try{
@@ -43,14 +44,24 @@ async function deploy(){
                 gas:4712388
             });
         console.log('Contract Address:',ContractObject.options.address)
-        const result = await AssetInstance.get('getValue',[],defaultAccount);
-        console.log('Value of Asset:', result)
+        const value = await AssetInstance.get('getValue',[],defaultAccount);
+        console.log('Value of Asset:', value)
         console.log('Changing Asset Value')
-        const result2 = await AssetInstance.set('changeValue', [134],defaultAccount);
-        if (result2) {
-            const result = await AssetInstance.get('getValue',[],defaultAccount);
-            console.log('New Asset Value:', result)
+        const setResult = await AssetInstance.set('changeValue', [134],defaultAccount);
+        if (setResult) {
+            const newValue = await AssetInstance.get('getValue',[],defaultAccount);
+            console.log('New Asset Value:', newValue)
         }
+
+        const owner = await AssetInstance.get('owner',[],defaultAccount);
+        console.log('Current Owner:', owner)
+        console.log('Changing Owner')
+        const changeOwnerState = await AssetInstance.set('transferOwnership', [accounts[1]],defaultAccount);
+        if (changeOwnerState) {
+            const newOwner = await AssetInstance.get('owner',[],defaultAccount);
+            console.log('New Owner Value:', newOwner)
+        }
+
     } catch(e){
         console.log(e)
     }
