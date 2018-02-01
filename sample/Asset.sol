@@ -29,5 +29,9 @@ contract Asset is Administered {
         value = newValue;
         return true;
     }
+
+    function getValue() public constant returns(uint) {
+        return value;
+    }
     
 }

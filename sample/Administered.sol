@@ -1,23 +1,23 @@
 pragma solidity ^0.4.16;
 contract Administered {
     
-    address public adminstrator;
+    address public administrator;
     
     modifier requireAdministrator {
-        require(adminstrator == msg.sender);
+        require(administrator == msg.sender);
         _;
     }
     
     event LogAdministratorChanged(address oldAdmin, address newAdmin);
     
     function Administered() public {
-        adminstrator = msg.sender;
+        administrator = msg.sender;
     }
     
     function changeAdministrator(address newAdmin) public requireAdministrator returns(bool success){
         require(newAdmin!=0);
-        adminstrator = newAdmin;
-        LogAdministratorChanged(msg.sender,adminstrator);
+        administrator = newAdmin;
+        LogAdministratorChanged(msg.sender,administrator);
         return true;
     }
 }
