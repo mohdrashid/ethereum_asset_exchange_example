@@ -30,7 +30,8 @@ async function deploy(){
     const accounts = await web3.eth.getAccounts();
     const defaultAccount = accounts[0];
     const contractInstances = await contract3.getInstances(input);
-    const AssetInstance = contractInstances['Asset'];
+    //Returns a new instance of the contract Asset 
+    const AssetInstance = contractInstances['Asset']();
     try{
         const ContractObject = await AssetInstance.deployContract(
             //args to constuctor
